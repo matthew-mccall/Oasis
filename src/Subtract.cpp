@@ -3,6 +3,7 @@
 //
 
 #include "Oasis/Subtract.hpp"
+#include "Oasis/Add.hpp"
 #include "Oasis/Divide.hpp"
 #include "Oasis/Exponent.hpp"
 #include "Oasis/Imaginary.hpp"
@@ -151,6 +152,38 @@ auto Subtract<Expression>::Specialize(const Expression& other, tf::Subflow& subf
 
     auto otherGeneralized = other.Generalize(subflow);
     return std::make_unique<Subtract>(dynamic_cast<const Subtract&>(*otherGeneralized));
+}
+
+auto Subtract<Expression>::Integrate(const Expression& integrationVariable) -> std::unique_ptr<Expression>
+{
+    // Single integration variable
+    if (auto variable = Variable::Specialize(integrationVariable); variable != nullptr) {
+        auto simplifiedSub = this->Simplify();
+
+        // Make sure we're still subtracting
+        if (auto adder = Subtract<Expression>::Specialize(*simplifiedSub); adder != nullptr) {
+            auto leftRef = adder->GetLeastSigOp().Copy();
+            auto leftIntegral = leftRef->Integrate(integrationVariable);
+
+            auto specializedLeft = Add<Expression>::Specialize(*leftIntegral);
+
+            auto rightRef = adder->GetMostSigOp().Copy();
+            auto rightIntegral = rightRef->Integrate(integrationVariable);
+
+            auto specializedRight = Add<Expression>::Specialize(*rightIntegral);
+
+            if (specializedLeft == nullptr || specializedRight == nullptr) {
+                return Copy();
+            }
+
+            return std::make_unique<Add<Subtract<Expression>, Variable>>(Add { Subtract<Expression> { *(specializedLeft->GetMostSigOp().Copy()), *(specializedRight->GetMostSigOp().Copy()) }, Variable { "C" } })->Simplify();
+        }
+        // If not, use other integration technique
+        else {
+            return simplifiedSub->Integrate(integrationVariable);
+        }
+    }
+    return Copy();
 }
 
 } // Oasis

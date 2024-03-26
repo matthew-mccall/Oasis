@@ -243,6 +243,11 @@ auto Expression::Specialize(const Expression& other, tf::Subflow& subflow) -> st
     return other.Copy(subflow);
 }
 
+auto Expression::Integrate(const Expression&) -> std::unique_ptr<Expression>
+{
+    return Copy();
+}
+
 auto Expression::Simplify() const -> std::unique_ptr<Expression>
 {
     return Copy();
