@@ -48,7 +48,7 @@ void setOps(T& exp, const std::unique_ptr<Oasis::Expression>& op1, const std::un
 bool processOp(std::stack<std::string>& ops, std::stack<std::unique_ptr<Oasis::Expression>>& st)
 {
     if (st.size() < 2) {
-        throw std::runtime_error("Invalid number of arguments");
+        return false;
     }
 
     const std::unique_ptr<Oasis::Expression> right = std::move(st.top());
@@ -101,7 +101,7 @@ bool processOp(std::stack<std::string>& ops, std::stack<std::unique_ptr<Oasis::E
 bool processFunction(std::stack<std::unique_ptr<Oasis::Expression>>& st, const std::string& function_token)
 {
     if (st.size() < 2) {
-        throw std::runtime_error("Invalid number of arguments");
+        return false;
     }
 
     // If we have a function active, the second operand has just been pushed onto the stack
@@ -276,7 +276,7 @@ auto FromInFix(const std::string& str) -> ParseResult {
             }
 
             if (ops.empty() || ops.top() != "(") {
-                throw std::runtime_error("Mismatched parenthesis");
+                return ParseResult { "Mismatched parenthesis" };
             }
 
             ops.pop(); // pop '('
@@ -304,7 +304,7 @@ auto FromInFix(const std::string& str) -> ParseResult {
     // Process remaining ops
     while (!ops.empty()) {
         if (!processOp(ops, st)) {
-            return ParseResult { fmt::format(R"(Unknown operator: "{}")", token) };
+            return ParseResult { fmt::format(R"(Unknown operator: "{}" or invalid number of arguments)", token) };
         }
     }
 
