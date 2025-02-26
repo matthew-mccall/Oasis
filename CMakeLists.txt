@@ -40,7 +40,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2 GSL)
 
 include(cmake/FetchBoost.cmake)
-include(cmake/FetchEigen.cmake) # TODO: Add uBLAS as a backend option
+include(cmake/FetchEigen.cmake)
 include(cmake/FetchTinyxml2.cmake)
 
 # Processes the CMakeLists.txt for each target.
