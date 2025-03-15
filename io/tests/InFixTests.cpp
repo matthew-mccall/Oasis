@@ -105,7 +105,7 @@ TEST_CASE("In-Fix Preprocessor Works with Implicit Multiplication and Functions"
 TEST_CASE("In-Fix Rejects Mismatched Parenthesis", "[Parsing]")
 {
     const auto result = Oasis::FromInFix(")");
-    REQUIRE(!result.has_value());
+    REQUIRE_FALSE(result);
 }
 
 TEST_CASE("In-Fix Works With Parenthesis", "[Parsing]")
@@ -114,6 +114,6 @@ TEST_CASE("In-Fix Works With Parenthesis", "[Parsing]")
 
     auto InFixWithDefaultArgs = [](const std::string& in) { return Oasis::FromInFix(in); };
     const auto result = std::string{ "(4+3)" } | Oasis::PreProcessInFix | InFixWithDefaultArgs;
-    REQUIRE(result.has_value());
+    REQUIRE(result);
     REQUIRE(result.value()->Equals(expected));
 }
