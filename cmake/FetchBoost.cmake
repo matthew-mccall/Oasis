@@ -7,6 +7,6 @@ FetchContent_Declare(
         FIND_PACKAGE_ARGS CONFIG
 )
 
-set(BOOST_INCLUDE_LIBRARIES any callable_traits mpl)
+set(BOOST_INCLUDE_LIBRARIES any bimap callable_traits mpl)
 set(BOOST_ENABLE_COMPATIBILITY_TARGETS ON)
 FetchContent_MakeAvailable(Boost)
