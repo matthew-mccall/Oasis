@@ -1,0 +1,4 @@
+{
+  "image": "ghcr.io/matthew-mccall/dockerfiles/clion/fedora/cpp-env:main",
+  "features": {}
+}
