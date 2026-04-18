@@ -2,8 +2,8 @@
 // Created by codin on 10/31/25.
 //
 
-#ifndef OASIS_PALMCONST_HPP
-#define OASIS_PALMCONST_HPP
+#ifndef OASIS_PALMHELPER_HPP
+#define OASIS_PALMHELPER_HPP
 
 #include <array>
 #include <string_view>
@@ -31,4 +31,4 @@ constexpr std::string_view PALM_MATRIX = "matrix";
 constexpr inline std::array<std::string_view, 1> PALM_PI = { "pi" };
 constexpr inline std::string_view PALM_EULER = "e";
 }
-#endif // OASIS_PALMCONST_HPP
+#endif // OASIS_PALMHELPER_HPP
