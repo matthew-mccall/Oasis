@@ -126,11 +126,10 @@ auto PALMSerializer::TypedVisit(const Integral<>& integral) -> RetT
 auto PALMSerializer::TypedVisit(const Matrix& /*matrix*/) -> RetT
 {
     // TODO: Implement Matrix serialization
-    return std::unexpected <PALMSerializationError> {
+    return std::unexpected<PALMSerializationError> {
         PALMSerializationError {
             .type = PALMSerializationError::PALMSerializationErrorType::Other,
-            .message = "Matrix serialization not yet implemented"
-        }
+            .message = "Matrix serialization not yet implemented" }
     };
 }
 
@@ -301,7 +300,7 @@ auto PALMSerializer::SerializeExpression(const DerivedFromBinaryExpression auto&
 
     if (!expr.HasLeastSigOp()) {
         return std::unexpected { PALMSerializationError {
-        .type = PALMSerializationError::PALMSerializationErrorType::MissingOperand,
+            .type = PALMSerializationError::PALMSerializationErrorType::MissingOperand,
             .expression = &expr,
             .message = "Expression missing least significant operand" } };
     }

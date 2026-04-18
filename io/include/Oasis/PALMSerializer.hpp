@@ -10,8 +10,8 @@
 #include <vector>
 
 #include "../../src/PALMTypes.hpp"
-#include "Oasis/Visit.hpp"
 #include "Oasis/Expression.hpp"
+#include "Oasis/Visit.hpp"
 
 namespace Oasis {
 

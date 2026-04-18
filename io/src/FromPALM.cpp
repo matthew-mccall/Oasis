@@ -301,8 +301,7 @@ auto FromPALM(const std::string& palmString) -> std::expected<std::unique_ptr<Ex
     return std::unexpected { PALMParseError {
         .type = PALMParseError::PALMParseErrorType::None,
         .token = token,
-        .message = "FromPALMNew not yet implemented."
-    } };
+        .message = "FromPALMNew not yet implemented." } };
 }
 
 auto TokenizePALM(const std::string& palmString) -> TokenStream
