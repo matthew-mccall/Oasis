@@ -42,6 +42,9 @@ class BinaryExpression;
 template <template <IExpression> class DerivedT, IExpression OpT>
 class UnaryExpression;
 
+template <typename DerivedT>
+class LeafExpression;
+
 /**
  * Checks if type T is same as any of the provided types in U.
  *
@@ -60,6 +63,11 @@ concept DerivedFromBinaryExpression = requires(Derived& d) {
 template <typename Derived>
 concept DerivedFromUnaryExpression = requires(Derived& d) {
     []<template <typename> typename D, IExpression T>(UnaryExpression<D, T>&) { }(d);
+};
+
+template <typename Derived>
+concept DerivedFromLeafExpression = requires(Derived& d) {
+    []<IExpression T>(LeafExpression<T>&) { }(d);
 };
 
 template <typename T>
