@@ -5,11 +5,11 @@
 #ifndef OASIS_PALMTOKENIZER_HPP
 #define OASIS_PALMTOKENIZER_HPP
 
+#include "Oasis/PALMTypes.hpp"
 #include "PALMConsts.hpp"
-#include "PALMTypes.hpp"
 
-#include <unordered_set>
 #include <regex>
+#include <unordered_set>
 
 namespace Oasis {
 

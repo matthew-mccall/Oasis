@@ -21,6 +21,7 @@
 #include "Oasis/Negate.hpp"
 #include "Oasis/Pi.hpp"
 #include "Oasis/Real.hpp"
+#include "Oasis/Sine.hpp"
 #include "Oasis/Subtract.hpp"
 #include "Oasis/Undefined.hpp"
 #include "Oasis/Variable.hpp"
@@ -123,12 +124,13 @@ auto PALMSerializer::TypedVisit(const Integral<>& integral) -> RetT
     return SerializeExpression(integral);
 }
 
-auto PALMSerializer::TypedVisit(const Matrix& /*matrix*/) -> RetT
+auto PALMSerializer::TypedVisit(const Matrix& matrix) -> RetT
 {
     // TODO: Implement Matrix serialization
     return std::unexpected<PALMSerializationError> {
         PALMSerializationError {
             .type = PALMSerializationError::PALMSerializationErrorType::Other,
+            .expression = &matrix,
             .message = "Matrix serialization not yet implemented" }
     };
 }
@@ -313,4 +315,11 @@ auto PALMSerializer::SerializeExpression(const DerivedFromBinaryExpression auto&
     return WrapExpression(expr.GetType(), { mostSigOpResult, leastSigOpResult });
 }
 
+auto PALMSerializer::TypedVisit(const Sine<Expression>& sine) -> RetT
+{
+    return std::unexpected { PALMSerializationError {
+        .type = PALMSerializationError::PALMSerializationErrorType::UnsupportedExpression,
+        .expression = &sine,
+        .message = "Sine expressions are not supported in PALM serialization" } };
+}
 }

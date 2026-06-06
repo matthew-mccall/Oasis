@@ -5,8 +5,8 @@
 #ifndef OASIS_FROMPALM_HPP
 #define OASIS_FROMPALM_HPP
 
-#include "../src/PALMTypes.hpp"
 #include "Oasis/Expression.hpp"
+#include "PALMTypes.hpp"
 
 namespace Oasis {
 

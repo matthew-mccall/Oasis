@@ -5,8 +5,8 @@
 #ifndef OASIS_PALMCONSTS_HPP
 #define OASIS_PALMCONSTS_HPP
 
+#include "Oasis/PALMTypes.hpp"
 #include "Oasis/Expression.hpp"
-#include "PALMTypes.hpp"
 
 #include <boost/assign/list_of.hpp>
 

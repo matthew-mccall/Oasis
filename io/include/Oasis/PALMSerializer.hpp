@@ -9,9 +9,10 @@
 #include <string>
 #include <vector>
 
-#include "../../src/PALMTypes.hpp"
+#include "Oasis/Concepts.hpp"
 #include "Oasis/Expression.hpp"
 #include "Oasis/Visit.hpp"
+#include "PALMTypes.hpp"
 
 namespace Oasis {
 
@@ -35,6 +36,7 @@ struct PALMSerializationError {
         None,
         InvalidIdentifier,
         MissingOperand,
+        UnsupportedExpression,
         Other
     } type;
 
@@ -80,6 +82,7 @@ public:
     auto TypedVisit(const Matrix& matrix) -> RetT override;
     auto TypedVisit(const EulerNumber&) -> RetT override;
     auto TypedVisit(const Pi&) -> RetT override;
+    auto TypedVisit(const Sine<Expression>& sine) -> RetT override;
     auto TypedVisit(const Magnitude<Expression>& magnitude) -> RetT override;
     ~PALMSerializer() override = default;
 

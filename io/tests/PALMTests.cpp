@@ -6,8 +6,7 @@
 
 #include "Oasis/FromPALM.hpp"
 #include "Oasis/PALMSerializer.hpp"
-
-#include "../src/PALMTypes.hpp"
+#include "Oasis/PALMTypes.hpp"
 
 #include "Oasis/Add.hpp"
 #include "Oasis/Derivative.hpp"
